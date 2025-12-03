@@ -41,12 +41,12 @@ export async function modificarActor(idActor: string, datos: DatosFormulario): P
     const sentencia = gql`
         mutation modificarActor(
             $id: ID!
-            $nombre: String
-            $biografia: String
-            $urlFoto: String
-            $activo: Boolean
-            $fechaNacimiento: String
-            $peliculas: [String]
+            $nombre: String!
+            $biografia: String!
+            $urlFoto: String!
+            $activo: Boolean!
+            $fechaNacimiento: String!
+            $peliculas: [String]!
         ) {
         updateActor(
             id: $id
@@ -76,12 +76,12 @@ export async function modificarActor(idActor: string, datos: DatosFormulario): P
 export async function crearActor(datos: DatosFormulario): Promise<Actor> {
     const sentencia = gql`
         mutation crearActor(
-            $nombre: String
-            $biografia: String
-            $urlFoto: String
-            $activo: Boolean
-            $fechaNacimiento: String
-            $peliculas: [String]
+            $nombre: String!
+            $biografia: String!
+            $urlFoto: String!
+            $activo: Boolean!
+            $fechaNacimiento: String!
+            $peliculas: [String]!
         ) {
         createActor(
             active: $activo
