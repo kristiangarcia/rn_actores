@@ -6,6 +6,7 @@ import { TextInput, Pressable, ScrollView } from 'react-native'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { Image } from 'expo-image'
 import dayjs from 'dayjs'
+import DialogoNuevaPelicula from './DialogoNuevaPelicula'
 
 type EditorActorProps = {
     actorSeleccionado?: ActorCompleto
@@ -24,12 +25,14 @@ export default function EditorActor({
     const [biografia, setBiografia] = useState(actorSeleccionado?.biografia ?? "")
     const [urlFoto, setUrlFoto] = useState(actorSeleccionado?.urlFoto ?? "")
     const [peliculas, setPeliculas] = useState<Array<string>>(actorSeleccionado?.peliculas ?? [])
+    const [dialogoVisible, setDialogoVisible] = useState(false);
 
-    function accionBorrarPelicula() {
-        // Lógica para borrar una película
+    function accionBorrarPelicula(pelicula: Pelicula) {
+        const nuevaListaPeliculas = peliculas.filter(p => p !== pelicula);
+        setPeliculas(nuevaListaPeliculas);
     }
-    function accionNuevaPelicula(pelicula: Pelicula) {
-        // Lógica para añadir una nueva película
+    function accionNuevaPelicula() {
+        setDialogoVisible(true)
     }
     function getEtiquetaPelicula(pelicula: Pelicula) {
         return (
@@ -39,6 +42,10 @@ export default function EditorActor({
                 accionBorrarPelicula={accionBorrarPelicula}
             />
         )
+    }
+    function nuevaPelicula(pelicula: Pelicula) {
+        const nuevaListaPeliculas = [...peliculas, pelicula];
+        setPeliculas(nuevaListaPeliculas);
     }
 
     return (
@@ -110,7 +117,7 @@ export default function EditorActor({
                     {
                         peliculas.map((pelicula) => getEtiquetaPelicula(pelicula))
                     }
-                    <Pressable style={styles.botonNuevaPelicula} onPress={() => accionNuevaPelicula}>
+                    <Pressable style={styles.botonNuevaPelicula} onPress={accionNuevaPelicula}>
                         <Text style={styles.textoNuevaPelicula}>Nueva Película</Text>
                     </Pressable>
                 </View>
@@ -148,6 +155,13 @@ export default function EditorActor({
                 <Pressable style={styles.boton} onPress={() => setModalVisible(false)}>
                     <Text style={styles.textoBoton}>Salir</Text>
                 </Pressable>
+            </View>
+            <View style={styles.contenedor}>
+                <DialogoNuevaPelicula
+                    dialogoVisible={dialogoVisible}
+                    setDialogoVisible={setDialogoVisible}
+                    nuevaPelicula={nuevaPelicula}
+                />
             </View>
         </View>
     );
