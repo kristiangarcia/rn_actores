@@ -156,13 +156,11 @@ export default function EditorActor({
                     <Text style={styles.textoBoton}>Salir</Text>
                 </Pressable>
             </View>
-            <View style={styles.contenedor}>
-                <DialogoNuevaPelicula
-                    dialogoVisible={dialogoVisible}
-                    setDialogoVisible={setDialogoVisible}
-                    nuevaPelicula={nuevaPelicula}
-                />
-            </View>
+            <DialogoNuevaPelicula
+                dialogoVisible={dialogoVisible}
+                setDialogoVisible={setDialogoVisible}
+                nuevaPelicula={nuevaPelicula}
+            />
         </View>
     );
 }

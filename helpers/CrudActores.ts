@@ -24,7 +24,7 @@ export async function completarActor(actor: Actor): Promise<ActorCompleto> {
             Actor(id:$id) {
                 activo:active
                 biografia:bio
-                fechaNacimiento:birthDate
+                fechaNacimiento:birthdate
                 id
                 urlFoto:imageUrl
                 peliculas:movies
@@ -58,6 +58,7 @@ export async function modificarActor(idActor: string, datos: DatosFormulario): P
             name: $nombre
         ) {
             id
+            nombre: name
             urlFoto: imageUrl
             }
         }
@@ -98,7 +99,7 @@ export async function crearActor(datos: DatosFormulario): Promise<Actor> {
     `
 
     const respuesta = await request(URL, sentencia, datos)
-    return respuesta.crearActor;
+    return respuesta.createActor;
 }
 
 export async function borrarActor(idActor: string): Promise<string> {

@@ -11,7 +11,7 @@ type VisorPeliculaProps = {
 export default function VisorPelicula({pelicula, accionBorrarPelicula}:VisorPeliculaProps) {
     return (
         <View style={styles.contenedor}>
-            <Text style={styles.texto}></Text>
+            <Text style={styles.texto}>{pelicula}</Text>
             <Pressable onPress={() => accionBorrarPelicula(pelicula)}>
                 <MaterialIcons name={"cancel"} size={16} color={"#E0E0FF"} />
             </Pressable>
